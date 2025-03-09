@@ -1,0 +1,33 @@
+ [
+    {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "phone": "+1 234 567 8901"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "phone": "+1 987 654 3210"
+    },
+    {
+      "name": "Michael Johnson",
+      "email": "michaelj@example.com",
+      "phone": "+1 456 789 0123"
+    },
+    {
+      "name": "Emily Davis",
+      "email": "emilyd@example.com",
+      "phone": "+1 789 123 4567"
+    },
+    {
+      "name": "Robert Brown",
+      "email": "robertb@example.com",
+      "phone": "+1 321 654 9870"
+    },
+    {
+      "name": "Sarah Wilson",
+      "email": "sarahw@example.com",
+      "phone": "+1 654 987 3210"
+    }
+  ]
+  
