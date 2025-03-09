@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -10,7 +10,10 @@ function App() {
 
   return (
     <RecoilRoot>
+      
+      <Suspense fallback={<div style={{ color: 'red' }}>Loading...</div>}>
       <Display />
+        </Suspense>
     </RecoilRoot>
      
   )

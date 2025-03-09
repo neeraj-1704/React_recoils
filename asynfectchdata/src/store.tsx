@@ -1,16 +1,15 @@
-import { atom, selector } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 import rawData from './Sample.json';
-
-export const userIdState = atom({
-    key: "userIdState",
-    default: 0,
-});
-
+import axios from "axios";
 interface User {
     name: string;
     email: string;
     phone: string;
 }
+export const userIdState = atom({
+    key: "userIdState",
+    default: 0,
+});
 
 export const fetchData = selector({
     key: "fetchData",
@@ -37,7 +36,6 @@ export const fetchData = selector({
 
             return responce;
 
-
         } catch (error: any) {
             return { error: error.message }
         }
@@ -45,3 +43,50 @@ export const fetchData = selector({
 })
 
 
+export const userID = atom({
+    key: "userID",
+    default: 1
+})
+
+
+export const fetchUserDetails = selector({
+    key: "fetchUserDetails",
+    get: async ({ get }) => {
+        const userId = get(userID);
+
+        try {
+            const response = await axios.get<User>(
+                `https://jsonplaceholder.typicode.com/users/${userId}`
+            );
+            return response.data;
+        } catch (error: any) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                return { error: `HTTP ${error.response.status}: ${error.response.data}`, loading: false };
+            } else if (error.request) {
+                // The request was made but no response was received
+                return { error: 'Network error', loading: false };
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                return { error: error.message, loading: false };
+            }
+        }
+    }
+})
+
+
+// Create a selectorFamily for fetching user details based on userID
+// export const fetchUserDetails1 = selectorFamily({
+//     key: 'fetchUserDetailsFamily',
+//     get: (userId) => async () => {
+//         try {
+//             const response = await axios.get(
+//                 `https://jsonplaceholder.typicode.com/users/${userId}`
+//             );
+//             return response.data;
+//         } catch (error: any) {
+//             return { error: error.message };
+//         }
+//     },
+// });
